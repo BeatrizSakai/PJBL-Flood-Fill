@@ -1,28 +1,28 @@
 public class FloodFillPilha {
-    public static void floodFillComPilha(int[][] image, int sr, int sc, int newColor) {
-        int rows = image.length;
-        int cols = image[0].length;
-        int originalColor = image[sr][sc];
-        if (originalColor == newColor) return;
+    public static void floodFillComPilha(int[][] image, int li, int ci, int corNova) {
+        int linhas = image.length;
+        int colunas = image[0].length;
+        int corOriginal = image[li][ci];
+        if (corOriginal == corNova) return;
 
         Pilha<int[]> pilha = new Pilha<>();
-        pilha.empilhar(new int[]{sr, sc});
+        pilha.empilhar(new int[]{li, ci});
 
-        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int[][] direcao = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
         while (!pilha.isEmpty()) {
-            int[] curr = pilha.desempilhar();
-            int row = curr[0];
-            int col = curr[1];
+            int[] atual = pilha.desempilhar();
+            int linha = atual[0];
+            int coluna = atual[1];
 
-            image[row][col] = newColor;
+            image[linha][coluna] = corNova;
 
-            for (int[] dir : directions) {
-                int newRow = row + dir[0];
-                int newCol = col + dir[1];
-                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols &&
-                    image[newRow][newCol] == originalColor) {
-                    pilha.empilhar(new int[]{newRow, newCol});
+            for (int[] dir : direcao) {
+                int linhaNova = linha + dir[0];
+                int colunaNova = coluna + dir[1];
+                if (linhaNova >= 0 && linhaNova < linhas && colunaNova >= 0 && colunaNova < colunas &&
+                    image[linhaNova][colunaNova] == corOriginal) {
+                    pilha.empilhar(new int[]{linhaNova, colunaNova});
                 }
             }
         }
